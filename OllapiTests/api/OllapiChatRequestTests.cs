@@ -21,9 +21,13 @@ namespace Ollapi.api.Tests
                 OllapiChatRequest test = new OllapiChatRequest("localhost", 11434, "example");
                 test.Open();
 
-                var message = new List<KeyValuePair<string, string>>
+                var message = new List<OllapiMessage>
                         {
-                            new KeyValuePair<string, string>("user", "しりとりをしましょう"),
+                            new OllapiMessage()
+                            {
+                                Role = "user",
+                                Content = "しりとりをしましょう"
+                            }
                         };
 
 
@@ -34,8 +38,7 @@ namespace Ollapi.api.Tests
 
                     if (tmp.Message != null)
                     {
-                        message.Add(new KeyValuePair<string, string>(tmp.Message.Role, tmp.Message.Content));
-
+                        message.Add(tmp.Message);
                         Debug.WriteLine(tmp.Message.Role.ToString() + ":" + tmp.Message.Content);
                     }
                 }

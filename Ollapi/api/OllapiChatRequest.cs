@@ -47,7 +47,7 @@ namespace Ollapi.api
         /// Request for generate endpoint
         /// </summary>
         /// <returns></returns>
-        public async Task<string> Request(List<KeyValuePair<string, string>> roleAndContentHistory)
+        public async Task<string> Request(List<OllapiMessage> roleAndContentHistory)
         {
             if (this.Message != null)
             {
@@ -60,7 +60,7 @@ namespace Ollapi.api
             }
         }
 
-        private string GetQuery(List<KeyValuePair<string, string>> roleAndContentHistory)
+        private string GetQuery(List<OllapiMessage> roleAndContentHistory)
         {
             StringBuilder query = new StringBuilder();
 
@@ -80,7 +80,15 @@ namespace Ollapi.api
                     {
                         query.Append(",");
                     }
-                    query.Append($"{{ \"role\": \"{item.Key}\", \"content\": \"{item.Value.Replace("\r", "").Replace("\n","")}\" }}");
+
+                    if (string.IsNullOrEmpty(item.Images))
+                    {
+                        query.Append($"{{ \"role\": \"{item.Role}\", \"content\": \"{item.Content.Replace("\r", "").Replace("\n", "")}\" }}");
+                    }
+                    else
+                    {
+                        query.Append($"{{ \"role\": \"{item.Role}\", \"content\": \"{item.Content.Replace("\r", "").Replace("\n", "")}\", \"images\": [\"{item.Images}\"] }}");
+                    }
                     index++;
                 }
                 query.Append("],");
