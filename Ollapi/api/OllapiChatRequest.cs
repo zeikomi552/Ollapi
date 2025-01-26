@@ -60,6 +60,14 @@ namespace Ollapi.api
             }
         }
 
+        private string CheckChar(string text)
+        {
+            return text.Replace("\r", "")
+                .Replace("\n", "")
+                .Replace("\t", "")
+                .Replace("\"", "");
+        }
+
         private string GetQuery(List<OllapiMessage> roleAndContentHistory)
         {
             StringBuilder query = new StringBuilder();
@@ -83,11 +91,11 @@ namespace Ollapi.api
 
                     if (string.IsNullOrEmpty(item.Images))
                     {
-                        query.Append($"{{ \"role\": \"{item.Role}\", \"content\": \"{item.Content.Replace("\r", "").Replace("\n", "")}\" }}");
+                        query.Append($"{{ \"role\": \"{item.Role}\", \"content\": \"{CheckChar(item.Content)}\" }}");
                     }
                     else
                     {
-                        query.Append($"{{ \"role\": \"{item.Role}\", \"content\": \"{item.Content.Replace("\r", "").Replace("\n", "")}\", \"images\": [\"{item.Images}\"] }}");
+                        query.Append($"{{ \"role\": \"{item.Role}\", \"content\": \"{CheckChar(item.Content)}\", \"images\": [\"{item.Images}\"] }}");
                     }
                     index++;
                 }
