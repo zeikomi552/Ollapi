@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ollapi.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ollapi.api
 {
-    public class OllapiMessage
+    public class OllapiMessage : IOllapiMessage
     {
         [JsonPropertyName("role")]
         public string Role { get; set; } = string.Empty;

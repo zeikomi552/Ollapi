@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ollapi.api;
 using Ollapi.Common;
+using Ollapi.Interface;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,7 +22,7 @@ namespace Ollapi.api.Tests
                 OllapiChatRequest test = new OllapiChatRequest("localhost", 11434, "example");
                 test.Open();
 
-                var message = new List<OllapiMessage>
+                var message = new List<IOllapiMessage>
                         {
                             new OllapiMessage()
                             {

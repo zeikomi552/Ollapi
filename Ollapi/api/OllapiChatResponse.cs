@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ollapi.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Ollapi.api
         public string Response { get; set; } = string.Empty;
 
         [JsonPropertyName("message")]
-        public OllapiMessage? Message { get; set; }
+        public IOllapiMessage? Message { get; set; }
 
         [JsonPropertyName("done")]
         public bool Done { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ollapi.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ namespace Ollapi.api
 
 
         [JsonPropertyName("message")]
-        public OllapiMessage? Message { get; set; } = new OllapiMessage();
+        public IOllapiMessage? Message { get; set; } = new OllapiMessage();
 
         /// <summary>
         /// Constructor
@@ -47,7 +48,7 @@ namespace Ollapi.api
         /// Request for generate endpoint
         /// </summary>
         /// <returns></returns>
-        public async Task<string> Request(List<OllapiMessage> roleAndContentHistory)
+        public async Task<string> Request(List<IOllapiMessage> roleAndContentHistory)
         {
             if (this.Message != null)
             {
@@ -68,7 +69,7 @@ namespace Ollapi.api
                 .Replace("\"", "");
         }
 
-        private string GetQuery(List<OllapiMessage> roleAndContentHistory)
+        private string GetQuery(List<IOllapiMessage> roleAndContentHistory)
         {
             StringBuilder query = new StringBuilder();
 
