@@ -20,7 +20,7 @@ namespace Ollapi.api
         public string Response { get; set; } = string.Empty;
 
         [JsonPropertyName("message")]
-        public IOllapiMessage? Message { get; set; }
+        public OllapiMessage? Message { get; set; }
 
         [JsonPropertyName("done")]
         public bool Done { get; set; }
